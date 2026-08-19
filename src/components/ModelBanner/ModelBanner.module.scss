@@ -1,0 +1,73 @@
+@import "variables";
+
+.banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 300px;
+  background: #1c1c1c;
+  color: $color-white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $space-4;
+  padding: $space-6;
+
+  h2 {
+    font-size: $fs-h1;
+    line-height: 1.1;
+    font-family: $font-body;
+
+    max-width: 12ch;
+  }
+}
+
+.label {
+  position: absolute;
+  top: $space-4;
+  left: $space-5;
+  font-size: $fs-xs;
+  font-family: $font-body;
+  letter-spacing: 0.2em;
+}
+
+.buy {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  align-self: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-sm;
+  font-family: $font-body;
+
+  &:hover {
+    background: $color-white;
+    color: $color-black;
+  }
+}
+
+.media {
+  position: relative;
+  min-height: 220px;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.corner {
+  position: absolute;
+  top: $space-4;
+  right: $space-4;
+}

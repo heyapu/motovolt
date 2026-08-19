@@ -1,0 +1,54 @@
+@import "variables";
+
+.hero {
+  text-align: center;
+  padding-top: $space-6;
+
+  h1 {
+    font-size: $fs-display;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: $fs-sm;
+    font-family: $font-body;
+  }
+}
+
+.tabsWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-5;
+}
+
+.content {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  font-family: $font-body;
+  padding-block: $space-6 $space-10;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.none {
+  color: $color-text-muted;
+  grid-column: 1 / -1;
+}

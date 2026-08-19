@@ -1,0 +1,26 @@
+@import "variables";
+
+.tabs {
+  display: inline-flex;
+  gap: $space-1;
+  background: $color-white;
+  border-radius: $radius-md;
+  padding: $space-1;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tab,
+.active {
+  border: 0;
+  background: transparent;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-4;
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.active {
+  background: $color-accent;
+  color: $color-white;
+}

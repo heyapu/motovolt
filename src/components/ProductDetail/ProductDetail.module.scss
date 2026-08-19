@@ -1,0 +1,140 @@
+@import "variables";
+
+.wrap {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+  padding-block: $space-8;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.media {
+  position: relative;
+  min-height: 380px;
+  background: $color-bg;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  img {
+    object-fit: contain;
+    padding: $space-6;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  h1 {
+    font-size: $fs-h1;
+    font-family: $font-body;
+  }
+}
+
+.desc {
+  color: $color-text-muted;
+  max-width: 46ch;
+  margin: 0;
+}
+
+.price {
+  font-size: $fs-h2;
+  font-weight: 700;
+  font-family: $font-body;
+  margin: 0;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  p {
+    margin: 0;
+  }
+}
+
+.label {
+  font-weight: 600;
+  font-size: $fs-sm;
+  font-family: $font-body;
+}
+
+.swatches {
+  display: flex;
+  gap: $space-2;
+}
+
+.swatch,
+.swatchOn {
+  min-width: 28px;
+  height: 28px;
+  padding-inline: $space-1;
+  border-radius: $radius-pill;
+  border: 2px solid $color-border;
+  font-size: $fs-xs;
+  background: $color-white;
+}
+
+.swatchOn {
+  border-color: $color-black;
+}
+
+.actions {
+  display: flex;
+  gap: $space-4;
+  align-items: center;
+}
+
+.add {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  border: 0;
+  border-radius: $radius-sm;
+  background: $color-accent;
+  color: $color-white;
+  padding: $space-4 $space-6;
+  font-weight: 700;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-dark;
+  }
+
+  &:disabled {
+    background: $color-border;
+    color: $color-text-muted;
+    cursor: not-allowed;
+  }
+}
+
+.cartIcon {
+  border: 0;
+  background: transparent;
+}
+
+.pill,
+.pillOn {
+  min-width: 40px;
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 2px solid $color-border;
+  background: $color-white;
+  font-size: $fs-sm;
+  font-weight: 600;
+}
+
+.pillOn {
+  border-color: $color-black;
+}
+
+.pillOut,
+.swatchOut {
+  opacity: 0.35;
+  position: relative;
+}

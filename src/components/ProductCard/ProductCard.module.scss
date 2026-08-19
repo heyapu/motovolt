@@ -1,0 +1,93 @@
+@import "variables";
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: $color-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-4;
+  min-height: 320px;
+
+  &:hover .add {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-3;
+  font-size: $fs-sm;
+}
+
+.title {
+  font-weight: 600;
+  font-family: $font-body;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.price {
+  font-weight: 700;
+}
+
+.media {
+  position: relative;
+  flex: 1;
+  margin-top: $space-3;
+}
+
+.img {
+  object-fit: contain;
+}
+
+.soldOut {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  z-index: 1;
+  font-size: $fs-xs;
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+  padding: 2px $space-2;
+  background: $color-white;
+  color: $color-text-muted;
+}
+
+.add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  margin-top: $space-3;
+  border: 0;
+  border-radius: $radius-sm;
+  background: $color-accent;
+  color: $color-white;
+  padding: $space-2 $space-3;
+  font-size: $fs-sm;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  &:disabled {
+    background: $color-border;
+    color: $color-text-muted;
+    cursor: not-allowed;
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}

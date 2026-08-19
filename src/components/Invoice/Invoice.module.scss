@@ -1,0 +1,78 @@
+@import "variables";
+
+.invoice {
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-5;
+
+  @media print {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid $color-black;
+  padding-bottom: $space-3;
+
+  p {
+    margin: 2px 0 0;
+    font-size: $fs-sm;
+    color: $color-text-muted;
+  }
+}
+
+.brand {
+  letter-spacing: 0.08em;
+  font-size: $fs-h3;
+}
+
+.metaRight {
+  text-align: right;
+}
+
+.customer {
+  margin-top: $space-4;
+  font-size: $fs-sm;
+
+  p {
+    margin: 2px 0;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: $space-4;
+  font-size: $fs-sm;
+
+  th,
+  td {
+    text-align: left;
+    padding: $space-2 $space-1;
+    border-bottom: 1px solid $color-border;
+  }
+
+  th:nth-child(n + 2),
+  td:nth-child(n + 2) {
+    text-align: right;
+  }
+
+  small {
+    color: $color-text-muted;
+  }
+
+  tfoot td {
+    font-weight: 700;
+    border-bottom: 0;
+    padding-top: $space-3;
+  }
+}
+
+.note {
+  margin-top: $space-4;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+}
