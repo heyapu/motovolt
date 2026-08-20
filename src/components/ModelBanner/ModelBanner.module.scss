@@ -4,7 +4,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  min-height: 300px;
+  min-height: 32rem;
   background: #1f1f1f;
   color: $color-white;
   border-radius: $radius-lg;
@@ -37,7 +37,6 @@
   left: 2rem;
   font-size: 1.4rem;
   font-family: $font-body;
-  // letter-spacing: 0.2em;
 }
 
 .buy {
@@ -61,7 +60,6 @@
 
 .media {
   position: relative;
-  // min-height: 220px;
 }
 
 .img {

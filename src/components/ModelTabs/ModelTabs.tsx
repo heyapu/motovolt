@@ -20,6 +20,7 @@ export default function ModelTabs({ models, activeId, onChange }: Props) {
           onClick={() => onChange(m.id)}
         >
           {m.name}
+          {m.sort_order === 0 && <span className={styles.newBadge}>NEW</span>}
         </button>
       ))}
     </div>

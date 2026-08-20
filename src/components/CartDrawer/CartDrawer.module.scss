@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   width: min(420px, 100%);
-  background: $color-white;
+  background: #fff;
   padding: $space-5;
   overflow-y: auto;
 }
@@ -23,8 +23,12 @@
   justify-content: space-between;
   align-items: center;
 
+  padding-bottom: 1rem;
+  border-bottom: 0.14rem solid hsl(0, 0%, 63%);
+
   h3 {
-    font-size: $fs-h3;
+    font-size: 2rem;
+    font-weight: 500;
     font-family: $font-body;
   }
 
@@ -58,8 +62,8 @@
 
 .thumb {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 6rem;
+  aspect-ratio: 1/1;
   background: $color-bg;
   border-radius: $radius-sm;
   overflow: hidden;
@@ -72,8 +76,9 @@
 .meta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: $fs-sm;
+  gap: 1px;
+  font-size: 1.4rem;
+  font-weight: 500;
 
   small {
     color: $color-text-muted;
@@ -105,10 +110,11 @@
 
   input {
     font-family: inherit;
-    font-size: $fs-sm;
-    border: 1px solid $color-border;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border: 0.2px solid $color-border;
     border-radius: $radius-sm;
-    padding: $space-3;
+    padding: 1rem 0.6rem;
 
     &:focus-visible {
       outline: 2px solid $color-accent;
@@ -172,8 +178,11 @@
 
 .formTitle {
   margin: $space-2 0 0;
-  font-weight: 700;
-  font-size: $fs-sm;
+
+  font-family: $font-body;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: hsl(0, 0%, 60%);
 }
 
 .row {

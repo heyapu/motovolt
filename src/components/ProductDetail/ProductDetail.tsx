@@ -68,78 +68,96 @@ export default function ProductDetail({ product }: { product: Product }) {
           priority
         />
       </div>
+      <div className={styles.infowraper}>
+        <div className={styles.info}>
 
-      <div className={styles.info}>
-        <h1>{product.title}</h1>
-        {product.description && <p className={styles.desc}>{product.description}</p>}
-        <p className={styles.price}>{inr(price)}</p>
-
-        {product.dimension && (
-          <div className={styles.block}>
-            <span className={styles.label}>Dimension</span>
-            <p>{product.dimension}</p>
+          <div className={styles.metadata}>
+            <h1>{product.title}</h1>
+            {product.description && <p className={styles.desc}>{product.description}</p>}
           </div>
-        )}
 
-        {options.map((o) => (
-          <div className={styles.block} key={o.name}>
-            <span className={styles.label}>
-              {o.name}
-              {selected[o.name] ? `: ${selected[o.name]}` : ""}
-            </span>
-            <div className={styles.swatches}>
-              {o.values.map((v) => {
-                const active = selected[o.name] === v.value;
-                const outOfStock = !valueHasStock(o.name, v.value);
-                return v.hex ? (
-                  <button
-                    key={v.value}
-                    aria-label={`${o.name} ${v.value}${outOfStock ? " (out of stock)" : ""}`}
-                    aria-pressed={active}
-                    className={`${active ? styles.swatchOn : styles.swatch} ${
-                      outOfStock ? styles.swatchOut : ""
-                    }`}
-                    style={{ background: v.hex }}
-                    title={v.value}
-                    onClick={() => setSelected((s) => ({ ...s, [o.name]: v.value }))}
-                  />
-                ) : (
-                  <button
-                    key={v.value}
-                    aria-pressed={active}
-                    className={`${active ? styles.pillOn : styles.pill} ${
-                      outOfStock ? styles.pillOut : ""
-                    }`}
-                    onClick={() => setSelected((s) => ({ ...s, [o.name]: v.value }))}
-                  >
-                    {v.value}
-                  </button>
-                );
-              })}
-            </div>
+
+          <div className={styles.moreinfo}>
+
+            {options.map((o) => (
+              <div className={styles.block} key={o.name}>
+                <span className={styles.label}>
+                  {o.name}
+
+                  {/* Color Name */}
+                  {/* {selected[o.name] ? `: ${selected[o.name]}` : ""} */}
+                </span>
+                <div className={styles.swatches}>
+                  {o.values.map((v) => {
+                    const active = selected[o.name] === v.value;
+                    const outOfStock = !valueHasStock(o.name, v.value);
+                    return v.hex ? (
+                      <button
+                        key={v.value}
+                        aria-label={`${o.name} ${v.value}${outOfStock ? " (out of stock)" : ""}`}
+                        aria-pressed={active}
+                        className={`${active ? styles.swatchOn : styles.swatch} ${outOfStock ? styles.swatchOut : ""
+                          }`}
+                        style={{ "--swatch-color": v.hex } as React.CSSProperties}
+                        title={v.value}
+                        onClick={() => setSelected((s) => ({ ...s, [o.name]: v.value }))}
+                      />
+                    ) : (
+                      <button
+                        key={v.value}
+                        aria-pressed={active}
+                        className={`${active ? styles.pillOn : styles.pill} ${outOfStock ? styles.pillOut : ""
+                          }`}
+                        onClick={() => setSelected((s) => ({ ...s, [o.name]: v.value }))}
+                      >
+                        {v.value}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+
+            {product.dimension && (
+              <div className={styles.block}>
+                <span className={styles.label}>Dimension</span>
+                <p className={styles.value}>{product.dimension}</p>
+              </div>
+            )}
+
+
           </div>
-        ))}
 
-        <QtyStepper value={qty} max={Math.max(stock, 1)} onChange={setQty} />
+          <div className={styles.datawraper}>
+            <p className={styles.datalabel}>Price</p>
+            <p className={styles.price}>{inr(price)}</p>
+          </div>
 
-        <div className={styles.actions}>
-          <button
-            className={styles.add}
-            disabled={stock <= 0 || unavailable}
-            onClick={add}
-          >
-            {unavailable
-              ? "Combination unavailable"
-              : stock <= 0
-              ? "Sold out"
-              : "Add to cart"}{" "}
-            <Plus size={16} />
-          </button>
-          <button className={styles.cartIcon} aria-label="Open cart" onClick={openCart}>
-            <ShoppingCart size={20} />
-          </button>
+          <div>
+            <QtyStepper value={qty} max={Math.max(stock, 1)} onChange={setQty} />
+          </div>
+
+
+          <div className={styles.actions}>
+            <button
+              className={styles.add}
+              disabled={stock <= 0 || unavailable}
+              onClick={add}
+            >
+              {unavailable
+                ? "Combination unavailable"
+                : stock <= 0
+                  ? "Sold out"
+                  : "Add to cart"}{" "}
+              <Plus size={14} />
+            </button>
+            <button className={styles.cartIcon} aria-label="Open cart" onClick={openCart}>
+              <ShoppingCart size={20} />
+            </button>
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

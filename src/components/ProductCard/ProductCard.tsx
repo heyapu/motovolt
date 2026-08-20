@@ -34,30 +34,30 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div className={styles.btns}>
-      {hasVariants ? (
-        <Link href={`/product/${product.slug}`} className={styles.add}>
-          Select options <Plus size={14} />
-        </Link>
-      ) : (
-        <button
-          className={styles.add}
-          disabled={soldOut}
-          onClick={() =>
-            addItem({
-              productId: product.id,
-              variantId: null,
-              title: product.title,
-              variantLabel: null,
-              unitPrice: product.price,
-              quantity: 1,
-              image: product.image,
-              slug: product.slug,
-            })
-          }
-        >
-          Add to cart <Plus size={14} />
-        </button>
-      )}
+        {hasVariants ? (
+          <Link href={`/product/${product.slug}`} className={styles.add}>
+            Choose variant <Plus size={14} />
+          </Link>
+        ) : (
+          <button
+            className={styles.add}
+            disabled={soldOut}
+            onClick={() =>
+              addItem({
+                productId: product.id,
+                variantId: null,
+                title: product.title,
+                variantLabel: null,
+                unitPrice: product.price,
+                quantity: 1,
+                image: product.image,
+                slug: product.slug,
+              })
+            }
+          >
+            Add to cart <Plus size={14} />
+          </button>
+        )}
       </div>
     </article>
   );

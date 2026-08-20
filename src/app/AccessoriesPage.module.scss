@@ -3,19 +3,25 @@
 .hero {
   text-align: center;
   padding-top: 10rem;
-  min-height: 90lvh;
+  min-height: 100lvh;
 
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
 
-  .herobanner{
+  .herobanner {
     position: absolute;
     bottom: 0;
-    object-fit: contain;
-    max-height: 80%;
+    object-fit: cover;
+    overflow: visible;
+    height: 100%;
+    max-height: 90dvh;
     z-index: 1;
+
+    @media (max-width: 60rem) {
+      width: 40rem;
+    }
   }
 
   h1 {
@@ -32,6 +38,8 @@
     color: $color-text-muted;
     font-size: $fs-sm;
     font-family: $font-body;
+
+    display: none;
   }
 }
 

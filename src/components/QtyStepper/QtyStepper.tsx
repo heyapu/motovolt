@@ -16,14 +16,14 @@ export default function QtyStepper({ value, min = 1, max = 99, onChange }: Props
         aria-label="Decrease quantity"
         onClick={() => onChange(Math.max(min, value - 1))}
       >
-        <Minus size={14} />
+        <Minus size={12} />
       </button>
       <span aria-live="polite">{value}</span>
       <button
         aria-label="Increase quantity"
         onClick={() => onChange(Math.min(max, value + 1))}
       >
-        <Plus size={14} />
+        <Plus size={12} />
       </button>
     </div>
   );

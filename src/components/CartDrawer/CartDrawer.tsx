@@ -121,7 +121,7 @@ export default function CartDrawer() {
         aria-label="Shopping cart"
       >
         <header className={styles.head}>
-          <h3>Your cart</h3>
+          <h3>Your Cart</h3>
           <button onClick={closeCart} aria-label="Close cart">
             <X size={18} />
           </button>
@@ -143,7 +143,7 @@ export default function CartDrawer() {
                     />
                   </div>
                   <div className={styles.meta}>
-                    <strong>{i.title}</strong>
+                    <p>{i.title}</p>
                     {i.variantLabel && <small>{i.variantLabel}</small>}
                     <span>{inr(i.unitPrice)}</span>
                   </div>
@@ -165,29 +165,29 @@ export default function CartDrawer() {
 
             <div className={styles.form}>
               <p className={styles.formTitle}>Contact</p>
-              <input placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
+              <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
               <input
-                placeholder="Phone (10 digits)"
+                placeholder="Contact number"
                 inputMode="numeric"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
               />
               <input
-                placeholder="Email (optional)"
+                placeholder="Email address"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
 
               <p className={styles.formTitle}>Delivery address</p>
-              <input placeholder="Address line 1" value={line1} onChange={(e) => setLine1(e.target.value)} />
-              <input placeholder="Address line 2 (optional)" value={line2} onChange={(e) => setLine2(e.target.value)} />
+              <input placeholder="Address line 1*" value={line1} onChange={(e) => setLine1(e.target.value)} />
+              <input placeholder="Address line 2" value={line2} onChange={(e) => setLine2(e.target.value)} />
               <div className={styles.row}>
                 <input placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
                 <input placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
               </div>
               <input
-                placeholder="Pincode (6 digits)"
+                placeholder="Pincode"
                 inputMode="numeric"
                 value={pincode}
                 onChange={(e) => setPincode(e.target.value.replace(/\D/g, "").slice(0, 6))}
@@ -203,7 +203,7 @@ export default function CartDrawer() {
               </div>
               <button className={styles.pay} disabled={!canPay || loading} onClick={checkout}>
                 {loading ? <Loader2 size={16} className={styles.spin} /> : null}
-                {loading ? "Opening payment…" : "Pay with Razorpay"}
+                {loading ? "Opening payment" : "Pay with Razorpay"}
               </button>
             </footer>
           </>

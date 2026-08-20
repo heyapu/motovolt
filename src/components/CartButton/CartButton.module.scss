@@ -7,12 +7,12 @@
   z-index: $z-cart-fab;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
+  width: 6rem;
+  height: 6rem;
   border: 0;
   border-radius: $radius-pill;
-  background: $color-white;
-  color: $color-accent;
+  background: #fff;
+  color: #222;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
@@ -28,6 +28,7 @@
   border-radius: $radius-pill;
   background: $color-accent;
   color: $color-white;
-  font-size: $fs-xs;
-  font-weight: 700;
+  font-size: 1rem;
+  font-family: $font-body;
+  font-weight: 500;
 }
