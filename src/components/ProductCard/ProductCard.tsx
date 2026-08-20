@@ -25,14 +25,15 @@ export default function ProductCard({ product }: { product: Product }) {
         <span className={styles.price}>{inr(product.price)}</span>
       </div>
       <Link href={`/product/${product.slug}`} className={styles.media}>
-        <Image
+        <img
           src={product.image ?? "/placeholder.webp"}
           alt={product.title}
-          fill
           sizes="(max-width: 640px) 100vw, 33vw"
           className={styles.img}
         />
       </Link>
+
+      <div className={styles.btns}>
       {hasVariants ? (
         <Link href={`/product/${product.slug}`} className={styles.add}>
           Select options <Plus size={14} />
@@ -57,6 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
           Add to cart <Plus size={14} />
         </button>
       )}
+      </div>
     </article>
   );
 }

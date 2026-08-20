@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: 1fr;
   min-height: 300px;
-  background: #1c1c1c;
+  background: #1f1f1f;
   color: $color-white;
   border-radius: $radius-lg;
   overflow: hidden;
@@ -19,37 +19,39 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: $space-4;
+  gap: 2rem;
   padding: $space-6;
 
-  h2 {
-    font-size: $fs-h1;
+  .bannertitle {
+    font-size: 2.8rem;
     line-height: 1.1;
     font-family: $font-body;
-
+    font-weight: 500;
     max-width: 12ch;
   }
 }
 
 .label {
   position: absolute;
-  top: $space-4;
-  left: $space-5;
-  font-size: $fs-xs;
+  top: 2rem;
+  left: 2rem;
+  font-size: 1.4rem;
   font-family: $font-body;
-  letter-spacing: 0.2em;
+  // letter-spacing: 0.2em;
 }
 
 .buy {
   display: inline-flex;
   align-items: center;
-  gap: $space-2;
+  gap: 0.4rem;
   align-self: flex-start;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: $radius-sm;
-  padding: $space-2 $space-4;
-  font-size: $fs-sm;
-  font-family: $font-body;
+  padding: 1.2rem 2rem;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: $font-heading;
 
   &:hover {
     background: $color-white;
@@ -59,11 +61,13 @@
 
 .media {
   position: relative;
-  min-height: 220px;
+  // min-height: 220px;
 }
 
 .img {
-  object-fit: cover;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
 }
 
 .corner {

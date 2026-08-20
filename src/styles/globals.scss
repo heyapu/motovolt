@@ -6,10 +6,16 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+
+
 }
 
 body {
@@ -35,7 +41,10 @@ button {
   cursor: pointer;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: $font-heading;
   margin: 0;
 }
