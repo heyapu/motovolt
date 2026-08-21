@@ -24,10 +24,10 @@
   align-items: center;
 
   padding-bottom: 1rem;
-  border-bottom: 0.14rem solid hsl(0, 0%, 63%);
+  // border-bottom: 0.14rem solid hsl(0, 0%, 63%);
 
   h3 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 500;
     font-family: $font-body;
   }
@@ -53,34 +53,68 @@
 }
 
 .item {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: $space-3;
+  display: flex;
+  flex-direction: row;
+  gap: 2.4rem;
   border-bottom: 1px solid $color-border;
   padding-bottom: $space-4;
 }
 
 .thumb {
+  display: flex;
   position: relative;
-  width: 6rem;
+  width: 100%;
+  max-width: 10rem;
   aspect-ratio: 1/1;
   background: $color-bg;
   border-radius: $radius-sm;
   overflow: hidden;
 
   img {
+    height: 100%;
+    width: 100%;
     object-fit: contain;
   }
 }
 
-.meta {
+.metawraper {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  width: 100%;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0.4rem 0rem;
+}
+
+.meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.4rem;
   font-size: 1.4rem;
   font-weight: 500;
 
+  .productinfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    h2 {
+      font-size: 1.4rem;
+      line-height: 100%;
+      font-weight: 500;
+      font-family: $font-body;
+    }
+  }
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
   small {
+    font-size: 1.2rem;
+    font-weight: 500;
     color: $color-text-muted;
   }
 }
@@ -148,10 +182,28 @@
   width: 100%;
   border: 0;
   border-radius: $radius-sm;
-  background: $color-accent;
-  color: $color-white;
-  padding: $space-4;
+  background: #000;
+  color: #fff;
+  padding: 1.8rem 1rem;
   font-weight: 700;
+  line-height: 100%;
+
+  font-weight: 500;
+  font-family: $font-heading;
+  font-size: 1.2rem;
+
+  .btninner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    span {
+      font-weight: 500;
+      font-family: $font-heading;
+      font-size: 1.6rem;
+    }
+  }
 
   &:disabled {
     background: $color-border;
@@ -189,4 +241,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: $space-3;
+}
+
+.fineprint {
+  font-size: 1rem;
+  line-height: 136%;
+  font-family: $font-body;
+  font-weight: 400;
+  padding: 1rem 1rem 0rem 1rem;
+  color: hsl(0, 0%, 60%);
 }

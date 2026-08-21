@@ -83,10 +83,10 @@ export interface OrderRow {
   rzp_payment_id: string | null;
   status: "PENDING" | "PAID" | "DELIVERED" | "FAILED" | "REFUNDED";
   amount: number;
-  customer_name: string;
-  customer_phone: string;
+  customer_name: string | null;
+  customer_phone: string | null;
   customer_email: string | null;
-  address: Address;
+  address: Address | null;
   created_at: string;
   paid_at: string | null;
   order_items: OrderItemRow[];

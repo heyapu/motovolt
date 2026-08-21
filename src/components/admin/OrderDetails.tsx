@@ -39,8 +39,8 @@ export default function OrderDetails({ order }: { order: OrderRow }) {
             <CardTitle className="text-base">Customer</CardTitle>
           </CardHeader>
           <CardContent className="space-y-1 text-sm">
-            <p className="font-medium">{order.customer_name}</p>
-            <p>{order.customer_phone}</p>
+            <p className="font-medium">{order.customer_name ?? "—"}</p>
+            <p>{order.customer_phone ?? "—"}</p>
             {order.customer_email && <p>{order.customer_email}</p>}
           </CardContent>
         </Card>
@@ -50,13 +50,19 @@ export default function OrderDetails({ order }: { order: OrderRow }) {
             <CardTitle className="text-base">Delivery address</CardTitle>
           </CardHeader>
           <CardContent className="text-sm">
-            <p>
-              {order.address.line1}
-              {order.address.line2 ? `, ${order.address.line2}` : ""}
-            </p>
-            <p>
-              {order.address.city}, {order.address.state} — {order.address.pincode}
-            </p>
+            {order.address ? (
+              <>
+                <p>
+                  {order.address.line1}
+                  {order.address.line2 ? `, ${order.address.line2}` : ""}
+                </p>
+                <p>
+                  {order.address.city}, {order.address.state} — {order.address.pincode}
+                </p>
+              </>
+            ) : (
+              <p className="text-muted-foreground">Not yet captured — payment pending.</p>
+            )}
           </CardContent>
         </Card>
 

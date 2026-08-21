@@ -46,6 +46,10 @@
   gap: 2.4rem;
   width: 80%;
 
+  @media (max-width: $bp-md) {
+    width: 100%;
+  }
+
   .metadata {
     display: flex;
     flex-direction: column;

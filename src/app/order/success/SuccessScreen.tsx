@@ -8,14 +8,17 @@ import type { OrderRow } from "@/types";
 const SUPPORT_PHONE = process.env.NEXT_PUBLIC_SUPPORT_PHONE ?? "+91 00000 00000";
 
 export default function SuccessScreen({ order }: { order: OrderRow | null }) {
-  if (!order || order.status !== "PAID") {
+  // Failed / missing order → clear message. Payment might still be
+  // captured via webhook a moment later; user can call to confirm.
+  if (!order || (order.status !== "PAID" && order.status !== "DELIVERED")) {
     return (
       <main className={styles.wrap}>
         <XCircle size={48} className={styles.failIcon} />
-        <h1>Payment not completed</h1>
+        <h1>Order not confirmed yet</h1>
         <p>
-          If money was deducted, it will be refunded automatically. You can try
-          again or call us at <a href={`tel:${SUPPORT_PHONE}`}>{SUPPORT_PHONE}</a>.
+          If money was deducted, your order is on our system — we&apos;ll call
+          you shortly to confirm. You can also reach us at{" "}
+          <a href={`tel:${SUPPORT_PHONE}`}>{SUPPORT_PHONE}</a>.
         </p>
         <Link href="/" className={styles.back}>
           Back to accessories
@@ -30,7 +33,8 @@ export default function SuccessScreen({ order }: { order: OrderRow | null }) {
         <CheckCircle2 size={48} className={styles.okIcon} />
         <h1>Order confirmed</h1>
         <p className={styles.lead}>
-          Thanks, {order.customer_name.split(" ")[0]}! Your payment went through.
+          Thanks{order.customer_name ? `, ${order.customer_name.split(" ")[0]}` : ""}!
+          Your payment went through.
         </p>
 
         <div className={styles.notice}>
@@ -38,9 +42,10 @@ export default function SuccessScreen({ order }: { order: OrderRow | null }) {
           <div>
             <strong>You&apos;ll receive a call within 24 hours</strong>
             <p>
-              Our team will confirm your order and delivery details on{" "}
-              {order.customer_phone}. There&apos;s no online tracking — this call
-              is your confirmation. Questions in the meantime? Call us at{" "}
+              Our team will confirm your order and delivery details
+              {order.customer_phone ? ` on ${order.customer_phone}` : ""}.
+              There&apos;s no online tracking — this call is your confirmation.
+              Questions in the meantime? Call us at{" "}
               <a href={`tel:${SUPPORT_PHONE}`}>{SUPPORT_PHONE}</a>.
             </p>
           </div>

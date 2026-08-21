@@ -39,9 +39,8 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
           <button
             key={s}
             onClick={() => setFilter(s)}
-            className={`rounded-full border px-3 py-1 text-xs font-medium ${
-              filter === s ? "border-primary bg-primary text-primary-foreground" : "bg-background"
-            }`}
+            className={`rounded-full border px-3 py-1 text-xs font-medium ${filter === s ? "border-primary bg-primary text-primary-foreground" : "bg-background"
+              }`}
           >
             {s === "ALL" ? `All (${orders.length})` : `${s} (${counts[s] ?? 0})`}
           </button>
@@ -78,8 +77,8 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
                     </p>
                   </TableCell>
                   <TableCell>
-                    <p className="font-medium">{order.customer_name}</p>
-                    <p className="text-xs text-muted-foreground">{order.customer_phone}</p>
+                    <p className="font-medium">{order.customer_name ?? "—"}</p>
+                    <p className="text-xs text-muted-foreground">{order.customer_phone ?? "Awaiting payment"}</p>
                   </TableCell>
                   <TableCell className="max-w-56">
                     <p className="truncate text-sm">

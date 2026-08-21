@@ -1,13 +1,19 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
-// Tailwind is scoped to the ADMIN area + shadcn-style ui components only.
-// The storefront uses SCSS modules and is untouched by these styles.
+/**
+ * Tailwind configuration
+ *
+ * Tailwind is scoped to the ADMIN area and shared UI components.
+ * The storefront uses SCSS modules and is intentionally excluded.
+ */
 const config: Config = {
   content: [
     "./src/app/admin/**/*.{ts,tsx}",
     "./src/components/admin/**/*.{ts,tsx}",
     "./src/components/ui/**/*.{ts,tsx}",
   ],
+
   theme: {
     extend: {
       colors: {
@@ -16,27 +22,33 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
+
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -44,6 +56,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+
+  plugins: [tailwindcssAnimate],
 };
+
 export default config;

@@ -47,6 +47,16 @@
   font-weight: 400;
   font-size: 1.8rem;
   font-family: $font-heading;
+
+  .soldout{
+    display: flex;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: hsl(0, 0%, 60%);
+    padding: 0.6rem 0.4rem;
+    background-color: hsl(0, 0%, 90%);
+    border-radius: 0.4rem;
+  }
 }
 
 .media {

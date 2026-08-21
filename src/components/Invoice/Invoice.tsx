@@ -28,11 +28,13 @@ export default function Invoice({ order }: { order: OrderRow }) {
         </p>
         <p>{order.customer_phone}</p>
         {order.customer_email && <p>{order.customer_email}</p>}
-        <p>
-          <strong>Deliver to:</strong> {order.address.line1}
-          {order.address.line2 ? `, ${order.address.line2}` : ""},{" "}
-          {order.address.city}, {order.address.state} — {order.address.pincode}
-        </p>
+        {order.address && (
+          <p>
+            <strong>Deliver to:</strong> {order.address.line1}
+            {order.address.line2 ? `, ${order.address.line2}` : ""},{" "}
+            {order.address.city}, {order.address.state} — {order.address.pincode}
+          </p>
+        )}
       </div>
 
       <table className={styles.table}>
