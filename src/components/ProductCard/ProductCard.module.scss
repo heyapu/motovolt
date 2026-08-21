@@ -12,14 +12,12 @@
   padding: 2rem;
   width: 100%;
   overflow: hidden;
-  min-height: 320px;
-
-  aspect-ratio: 1/1;
   aspect-ratio: 1/1;
 
   &:hover .add {
     opacity: 1;
-    transform: translateY(calc(0% + -2rem));
+    backdrop-filter: blur(0px);
+    transform: translateY(calc(0%));
   }
 }
 
@@ -66,7 +64,6 @@
   margin-top: $space-3;
   z-index: 0;
 
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,29 +89,34 @@
 .btns {
   display: flex;
   width: 100%;
+
   position: absolute;
-  bottom: 0;
+  bottom: 2rem;
   padding: 0rem 2rem;
 }
 
 .add {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: $space-2;
+
   border: 0;
   border-radius: $radius-sm;
   background: $color-accent;
+
   color: #fff;
   padding: 1.4rem 1rem;
   font-size: 1.2rem;
   font-weight: 500;
+
   width: 100%;
   font-family: $font-heading;
   text-transform: uppercase;
 
   opacity: 0;
-  transform: translateY(100%);
+  backdrop-filter: blur(100px);
+  transform: translateY(200%);
   transition: all 0.15s ease-in-out;
   z-index: 10;
 
@@ -124,12 +126,12 @@
     cursor: not-allowed;
   }
 
-  @media (hover: none) {
-    opacity: 1;
-    transform: none;
-  }
+  // @media (hover: none) {
+  //   opacity: 1;
+  //   transform: none;
+  // }
 
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
+  // @media (prefers-reduced-motion: reduce) {
+  //   transition: none;
+  // }
 }
