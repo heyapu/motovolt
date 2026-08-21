@@ -15,10 +15,11 @@
   min-height: 320px;
 
   aspect-ratio: 1/1;
+  aspect-ratio: 1/1;
 
   &:hover .add {
     opacity: 1;
-    transform: translateY(-2rem);
+    transform: translateY(calc(0% + -2rem));
   }
 }
 
@@ -48,7 +49,7 @@
   font-size: 1.8rem;
   font-family: $font-heading;
 
-  .soldout{
+  .soldout {
     display: flex;
     font-size: 1.1rem;
     text-transform: uppercase;
@@ -97,7 +98,6 @@
 }
 
 .add {
-
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -114,8 +114,8 @@
   text-transform: uppercase;
 
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: translateY(100%);
+  transition: all 0.15s ease-in-out;
   z-index: 10;
 
   &:disabled {

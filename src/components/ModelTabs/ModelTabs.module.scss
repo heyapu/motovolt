@@ -2,7 +2,7 @@
 
 .tabs {
   display: inline-flex;
-  gap: $space-1;
+  gap: 0rem;
   background: #fff;
   border-radius: $radius-md;
   padding: $space-1;
@@ -23,6 +23,12 @@
   align-items: center;
   flex-direction: row;
   gap: 0.6rem;
+
+  @media (max-width: 60rem) {
+    font-size: 1.2rem;
+    border-radius: 0.78rem;
+    padding: 1rem 0.8rem;
+  }
 }
 
 .active {
@@ -31,7 +37,7 @@
 }
 
 
-.newBadge{
+.newBadge {
   display: flex;
   padding: 0.3rem 0.2rem;
   border-radius: 0.2rem;
@@ -39,4 +45,9 @@
   font-weight: 500;
   background-color: #fff;
   color: $color-accent;
+
+  @media (max-width: 60rem) {
+    font-size: 0.48rem;
+    padding: 0.2rem 0.2rem;
+  }
 }
