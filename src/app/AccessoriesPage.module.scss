@@ -3,7 +3,7 @@
 .hero {
   text-align: center;
   padding-top: 10rem;
-  min-height: 90lvh;
+  min-height: 64rem;
 
   position: relative;
   display: flex;
@@ -13,7 +13,7 @@
   flex-direction: column;
 
   @media (max-width: 60rem) {
-    min-height: 80lvh;
+    min-height: 50rem;
   }
 
   .heromedia {

@@ -27,6 +27,8 @@ body {
 img {
   max-width: 100%;
   display: block;
+  user-select: none;
+  pointer-events: none;
 }
 
 button {
