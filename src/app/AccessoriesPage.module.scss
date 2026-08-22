@@ -8,22 +8,39 @@
   position: relative;
   display: flex;
   align-items: center;
+  flex-direction: column;
   overflow: hidden;
   flex-direction: column;
 
-  .herobanner {
+  @media (max-width: 60rem) {
+    min-height: 80lvh;
+  }
+
+  .heromedia {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     position: absolute;
     bottom: 0;
-    object-fit: contain;
-    overflow: visible;
+  }
+
+  .herobanner {
+
+    // object-fit: contain;
+    // overflow: visible;
     height: 100%;
+    // width: 100%;
     max-height: 90lvh;
     z-index: 0;
 
     @media (max-width: 60rem) {
-      width: 40rem;
-      max-height: 80lvh;
-      transform: translateX(4.4rem);
+      width: 100%;
+      max-height: 100%;
+      // max-height: 80lvh;
+
+      // transform: translateX(4.4rem);
       // left: 4rem;
     }
   }

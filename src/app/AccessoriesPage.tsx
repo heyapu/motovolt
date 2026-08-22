@@ -31,7 +31,17 @@ export default function AccessoriesPage({ models, products }: Props) {
         <div className={styles.tabsWrap}>
           <ModelTabs models={models} activeId={activeId} onChange={setActiveId} />
         </div>
-        <img src="/assets/hero.webp" className={styles.herobanner} />
+
+        <div className={styles.heromedia}>
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/assets/MB.png" />
+            <img
+              src="/assets/DB.png"
+              className={styles.herobanner}
+              alt=""
+            />
+          </picture>
+        </div>
       </section>
 
       <div className={styles.content}>
