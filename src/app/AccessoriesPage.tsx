@@ -24,7 +24,7 @@ export default function AccessoriesPage({ models, products }: Props) {
   );
 
   return (
-    <main>
+    <main className={styles.main}>
       <section className={styles.hero}>
         <h1>ACCESSORIES</h1>
         <p>Get all your accessories here under one roof.</p>
@@ -33,14 +33,19 @@ export default function AccessoriesPage({ models, products }: Props) {
         </div>
 
         <div className={styles.heromedia}>
-          <picture>
+          {/* <picture>
             <source media="(max-width: 768px)" srcSet="/assets/MB.png" />
             <img
               src="/assets/DB.png"
               className={styles.herobanner}
               alt=""
             />
-          </picture>
+          </picture> */}
+          <img
+            src="/assets/DB.png"
+            className={styles.herobanner}
+            alt=""
+          />
         </div>
       </section>
 
