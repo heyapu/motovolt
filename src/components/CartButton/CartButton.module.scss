@@ -4,7 +4,7 @@
   position: fixed;
   bottom: $space-5;
   left: $space-5;
-  z-index: $z-cart-fab;
+  z-index: 999999;
   display: grid;
   place-items: center;
   width: 6rem;
