@@ -13,6 +13,7 @@ export default function QtyStepper({ value, min = 1, max = 99, onChange }: Props
   return (
     <div className={styles.stepper}>
       <button
+        className={styles.fab}
         aria-label="Decrease quantity"
         onClick={() => onChange(Math.max(min, value - 1))}
       >
@@ -20,6 +21,7 @@ export default function QtyStepper({ value, min = 1, max = 99, onChange }: Props
       </button>
       <span aria-live="polite">{value}</span>
       <button
+        className={styles.fab}
         aria-label="Increase quantity"
         onClick={() => onChange(Math.min(max, value + 1))}
       >
