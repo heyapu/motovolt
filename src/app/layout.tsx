@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { CartProvider } from "@/context/CartContext";
 import CartButton from "@/components/CartButton/CartButton";
 import CartDrawer from "@/components/CartDrawer/CartDrawer";
+import Navbar from "@/components/system/navbar/Navbar";
 
 const chakra = Chakra_Petch({
   subsets: ["latin"],
@@ -46,7 +47,7 @@ export default function RootLayout({
     >
       <body>
         <CartProvider>
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
           <CartButton />
           <CartDrawer />
