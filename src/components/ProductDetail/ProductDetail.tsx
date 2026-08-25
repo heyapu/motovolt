@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { inr } from "@/lib/format";
 import QtyStepper from "@/components/QtyStepper/QtyStepper";
 import type { Product } from "@/types";
+import Navbar from "../Navbar/Navbar";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const { addItem, openCart } = useCart();
@@ -59,6 +60,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   return (
     <div className={styles.wrap}>
+      <Navbar />
       <div className={styles.media}>
         <Image
           src={image ?? "/placeholder.webp"}

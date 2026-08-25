@@ -5,6 +5,7 @@ import ModelTabs from "@/components/ModelTabs/ModelTabs";
 import ModelBanner from "@/components/ModelBanner/ModelBanner";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import type { Model, Product } from "@/types";
+import Navbar from "@/components/system/navbar/Navbar";
 
 interface Props {
   models: Model[];
@@ -25,6 +26,7 @@ export default function AccessoriesPage({ models, products }: Props) {
 
   return (
     <main className={styles.main}>
+      <Navbar />
       <section className={styles.hero}>
         <h1>ACCESSORIES</h1>
         <p>Get all your accessories here under one roof.</p>
