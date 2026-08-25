@@ -16,12 +16,22 @@ const chakra = Chakra_Petch({
 const roobert = localFont({
   src: [
     {
-      path: "../../public/fonts/roobert/Roobert-Regular.woff2",
+      path: "../../public/fonts/roobert/Roobert-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/roobert/Roobert-Medium.woff2",
+      path: "../../public/fonts/roobert/Roobert-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/roobert/Roobert-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/roobert/Roobert-Medium.otf",
       weight: "500",
       style: "normal",
     }

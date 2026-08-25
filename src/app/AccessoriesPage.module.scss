@@ -10,7 +10,7 @@
 .hero {
   text-align: center;
   padding-top: 10rem;
-  height: 60rem;
+  height: 70rem;
 
   position: relative;
   display: flex;
@@ -20,7 +20,8 @@
   flex-direction: column;
 
   @media (max-width: 768px) {
-    height: 60rem;
+    // height: 60rem;
+    width: 100%;
   }
 
   @media (max-width: 558px) {
@@ -28,16 +29,16 @@
   }
 
   @media (max-width: 458px) {
-    height: 46rem;
+    height: 53rem;
   }
 
-  @media (max-width: 400px) {
-    height: 40rem;
-  }
+  // @media (max-width: 400px) {
+  //   height: 40rem;
+  // }
 
-  @media (max-width: 360px) {
-    height: 38rem;
-  }
+  // @media (max-width: 360px) {
+  //   height: 38rem;
+  // }
 
   .heromedia {
     width: 100%;
