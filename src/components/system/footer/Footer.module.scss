@@ -1,0 +1,355 @@
+/* ================================================================
+   Footer
+   ================================================================ */
+
+.footer {
+    background: #000;
+    padding: 80px 0 0 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 10rem;
+}
+
+/* ── CTA card ── */
+
+.cta {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 40px;
+    background: #1f1f1f;
+    border-radius: 5px;
+    padding: 60px;
+    margin-bottom: 60px;
+    align-items: start;
+}
+
+.ctaLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ctaEyebrow {
+    color: #fff;
+    margin: 0;
+}
+
+.ctaHeading {
+    color: #fff;
+    margin: 0;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%;
+    font-family: var(--font-roobert);
+    max-width: 435px;
+}
+
+.ctaForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input {
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 14px 16px;
+    color: #000;
+    width: 100%;
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.selectWrap {
+    position: relative;
+}
+
+.select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.chevron {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.formSubmitRow {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.submitBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--color-1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s;
+
+    &:hover {
+        background: #d94e1e;
+    }
+}
+
+.formNote {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+/* ── Desktop nav columns ── */
+
+.linksGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 0px 60px;
+}
+
+.colHead {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 0 20px;
+}
+
+.colList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.colLink {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+/* Mobile nav — hidden on desktop */
+
+.mobileNav {
+    display: none;
+}
+
+/* ── Bottom section — CSS Grid for 2-row desktop layout ── */
+
+.bottomWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 44px 0 32px;
+    row-gap: 54px;
+}
+
+/* Row 1: logo left, socials right */
+
+.logoWrap {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+}
+
+.socialIcons {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.socialBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: opacity 0.2s;
+
+    img {
+        width: 18px;
+        height: auto;
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+/* Row 2: copyright left, legal links right */
+
+.copyright {
+    grid-column: 1;
+    grid-row: 2;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    align-self: center;
+}
+
+.legalLinks {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    align-items: center;
+}
+
+.legalLink {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .footer {
+        padding: 32px 0 0;
+    }
+
+    /* CTA card: single column */
+    .cta {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+        margin-bottom: 0;
+        gap: 24px;
+        border-radius: 12px;
+    }
+
+    .ctaHeading {
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+        /* 31.2px */
+        text-transform: capitalize;
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .ctaForm {
+        gap: 9px;
+    }
+
+    .formSubmitRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-top: 6px;
+    }
+
+    .submitBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 20px;
+        max-width: 200px;
+    }
+
+    /* Hide desktop nav grid */
+    .linksGrid {
+        display: none;
+    }
+
+    /* Show mobile nav rows */
+    .mobileNav {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+    }
+
+    .mobileNavRow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #8B8181;
+        text-decoration: none;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: opacity 0.2s;
+
+        svg path {
+            fill: #8b8181;
+        }
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    /* Bottom section: flex column, reorder logo→legal→socials→copyright */
+    .bottomWrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 32px 0 24px;
+        border-top: none;
+    }
+
+    .input {
+        padding: 10px 15px;
+    }
+
+    .logoWrap {
+        display: none;
+    }
+
+    .legalLinks {
+        order: 2;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+        border-bottom: #8B8181;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+
+    .socialIcons {
+        order: 3;
+        justify-content: flex-start;
+    }
+
+    .copyright {
+        order: 4;
+    }
+}

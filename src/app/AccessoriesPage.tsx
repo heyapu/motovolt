@@ -6,6 +6,7 @@ import ModelBanner from "@/components/ModelBanner/ModelBanner";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import type { Model, Product } from "@/types";
 import Navbar from "@/components/system/navbar/Navbar";
+import Footer from "@/components/system/footer/Footer";
 
 interface Props {
   models: Model[];
@@ -64,6 +65,8 @@ export default function AccessoriesPage({ models, products }: Props) {
           )}
         </section>
       </div>
+
+      <Footer />
     </main>
   );
 }
