@@ -96,7 +96,6 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={styles.container}>
 
-
                 {/* ── Desktop nav columns ── */}
                 <nav className={styles.linksGrid} aria-label="Footer navigation">
                     {Object.entries(links).map(([col, items]) => (
