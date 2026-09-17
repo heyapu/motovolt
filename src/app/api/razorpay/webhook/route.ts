@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { verifyWebhookSignature } from "@/lib/razorpay";
 import { markOrderPaid } from "@/lib/orders";
 import { dbAdmin } from "@/lib/db-admin";
+import { Resend } from "resend";
 
-// Backup source of truth — fires even if the user closes the tab
-// before the browser handler runs. markOrderPaid is idempotent.
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function POST(req: Request) {
   const rawBody = await req.text();
   const signature = req.headers.get("x-razorpay-signature") ?? "";
@@ -17,8 +19,46 @@ export async function POST(req: Request) {
 
   if (event.event === "payment.captured") {
     const payment = event.payload?.payment?.entity;
+    
     if (payment?.order_id) {
+      // 1. Mark the order as paid in Supabase
       await markOrderPaid(payment.order_id, payment.id);
+
+      // 2. Fetch and Notify Admins
+      try {
+        // Query the 'admins' table for all email addresses
+        const { data: admins, error: adminError } = await dbAdmin()
+          .from("admins")
+          .select("email");
+
+        if (adminError) {
+          console.error("Error fetching admins from Supabase:", adminError);
+        } else if (admins && admins.length > 0) {
+          
+          // Map the returned objects into an array of simple strings: ['admin1@test.com', 'admin2@test.com']
+          const adminEmails = admins.map((admin) => admin.email);
+
+          // Fire the email to the array of admins
+          await resend.emails.send({
+            from: "Motovolt Store <orders@notification.motovolt.co>", // Replace with your verified domain
+            to: adminEmails, 
+            subject: `New Successful Order! (${payment.order_id})`,
+            html: `
+              <h2>New Order Received!</h2>
+              <p><strong>Order ID:</strong> ${payment.order_id}</p>
+              <p><strong>Payment ID:</strong> ${payment.id}</p>
+              <p><strong>Amount:</strong> ₹${payment.amount / 100}</p> 
+              <p><strong>Method:</strong> ${payment.method}</p>
+            `,
+          });
+          console.log(`Successfully sent order notification to ${adminEmails.length} admin(s).`);
+        } else {
+          console.log("No admins found in the database. Email skipped.");
+        }
+      } catch (error) {
+        // Catch the error so it doesn't fail the Razorpay webhook response
+        console.error("Failed to send admin email:", error);
+      }
     }
   } else if (event.event === "payment.failed") {
     const payment = event.payload?.payment?.entity;
