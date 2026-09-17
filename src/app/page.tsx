@@ -27,7 +27,7 @@
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function Home() {
   const client = db();

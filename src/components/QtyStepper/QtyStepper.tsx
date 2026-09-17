@@ -7,19 +7,41 @@ interface Props {
   min?: number;
   max?: number;
   onChange: (v: number) => void;
+  onRemove?: () => void;
 }
 
-export default function QtyStepper({ value, min = 1, max = 99, onChange }: Props) {
+export default function QtyStepper({
+  value,
+  min = 1,
+  max = 99,
+  onChange,
+  onRemove,
+}: Props) {
+  const handleDecrease = () => {
+    if (value <= 1) {
+      if (onRemove) {
+        onRemove();
+      } else {
+        onChange(0);
+      }
+      return;
+    }
+
+    onChange(Math.max(min, value - 1));
+  };
+
   return (
     <div className={styles.stepper}>
       <button
         className={styles.fab}
-        aria-label="Decrease quantity"
-        onClick={() => onChange(Math.max(min, value - 1))}
+        aria-label={value <= 1 && onRemove ? "Remove item" : "Decrease quantity"}
+        onClick={handleDecrease}
       >
         <Minus size={12} />
       </button>
+
       <span aria-live="polite">{value}</span>
+
       <button
         className={styles.fab}
         aria-label="Increase quantity"

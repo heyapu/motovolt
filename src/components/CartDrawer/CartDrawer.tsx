@@ -165,15 +165,20 @@ export default function CartDrawer() {
                     <div className={styles.controls}>
                       <QtyStepper
                         value={i.quantity}
-                        onChange={(q) => updateQty(i.productId, i.variantId, q)}
+                        onChange={(q) => {
+                          if (q <= 0) {
+                            removeItem(i.productId, i.variantId);
+                          } else {
+                            updateQty(i.productId, i.variantId, q);
+                          }
+                        }}
+                        onRemove={() => removeItem(i.productId, i.variantId)}
                       />
                       <button
                         aria-label={`Remove ${i.title}`}
                         onClick={() => removeItem(i.productId, i.variantId)}
                       >
-                        {/* <Trash2 size={16} /> */}
                         <u>Remove</u>
-                        {/* Delete */}
                       </button>
                     </div>
                   </div>
