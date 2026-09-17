@@ -13,7 +13,7 @@ export default function Invoice({ order }: { order: OrderRow }) {
     <section className={styles.invoice} aria-label="Invoice">
       <header className={styles.head}>
         <div>
-          <strong className={styles.brand}>MOTOVOLT</strong>
+          <h2 className={styles.brand}>Motovolt</h2>
           <p>Accessories invoice</p>
         </div>
         <div className={styles.metaRight}>
@@ -32,7 +32,7 @@ export default function Invoice({ order }: { order: OrderRow }) {
           <p>
             <strong>Deliver to:</strong> {order.address.line1}
             {order.address.line2 ? `, ${order.address.line2}` : ""},{" "}
-            {order.address.city}, {order.address.state} — {order.address.pincode}
+            {order.address.city}, {order.address.state}, {order.address.pincode}
           </p>
         )}
       </div>

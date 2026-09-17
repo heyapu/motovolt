@@ -14,28 +14,37 @@
 .head {
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid $color-black;
+  // border-bottom: 2px solid $color-black;
   padding-bottom: $space-3;
 
   p {
     margin: 2px 0 0;
-    font-size: $fs-sm;
+    font-size: 1.2rem;
     color: $color-text-muted;
   }
 }
 
 .brand {
-  letter-spacing: 0.08em;
-  font-size: $fs-h3;
+  font-size: 2rem;
+  font-family: $font-body;
+  font-weight: 500;
 }
 
 .metaRight {
   text-align: right;
+
+  p {
+    font-family: $font-body;
+    font-size: 1.2rem;
+  }
 }
 
 .customer {
   margin-top: $space-4;
-  font-size: $fs-sm;
+  font-size: 1.4rem;
+  font-family: $font-body;
+  line-height: 136%;
+
 
   p {
     margin: 2px 0;
@@ -46,7 +55,8 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: $space-4;
-  font-size: $fs-sm;
+  font-size: 1.2rem;
+  font-weight: 500;
 
   th,
   td {
@@ -73,6 +83,6 @@
 
 .note {
   margin-top: $space-4;
-  font-size: $fs-xs;
+  font-size: 1.2rem;
   color: $color-text-muted;
 }

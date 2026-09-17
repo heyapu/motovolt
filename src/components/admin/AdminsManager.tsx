@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { UserPlus, Trash2, Loader2, ShieldCheck } from "lucide-react";
+import { UserPlus, Trash2, Loader2, ShieldCheck, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +22,7 @@ export default function AdminsManager({ admins, myEmail }: Props) {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState<"admin" | "superadmin">("admin");
   const [busy, setBusy] = useState(false);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function addAdmin() {
@@ -36,6 +37,22 @@ export default function AdminsManager({ admins, myEmail }: Props) {
     setBusy(false);
     if (!res.ok) return setError(data.error ?? "Could not add admin.");
     setEmail("");
+    router.refresh();
+  }
+
+  async function toggleNotify(id: string, currentNotify: boolean) {
+    setUpdatingId(id);
+    const res = await fetch("/api/admin/admins", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, notify: !currentNotify }),
+    });
+    setUpdatingId(null);
+    if (!res.ok) {
+      const data = await res.json();
+      alert(data.error ?? "Failed to update notification status.");
+      return;
+    }
     router.refresh();
   }
 
@@ -88,8 +105,7 @@ export default function AdminsManager({ admins, myEmail }: Props) {
           </Button>
           {error && <p className="w-full text-sm text-destructive">{error}</p>}
           <p className="w-full text-xs text-muted-foreground">
-            They sign in at <code>/admin</code> with this email via Kinde (Google
-            or email OTP — whatever you enabled in Kinde). Anyone not on this
+            They sign in at <code>/admin</code> with this email via Kinde. Anyone not on this
             list is denied even if they authenticate.
           </p>
         </CardContent>
@@ -103,6 +119,11 @@ export default function AdminsManager({ admins, myEmail }: Props) {
                 <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Added by</TableHead>
+                <TableHead className="w-36">
+                  <div className="flex items-center gap-1">
+                    <Bell size={14} /> Order Alerts
+                  </div>
+                </TableHead>
                 <TableHead className="w-12" />
               </TableRow>
             </TableHeader>
@@ -122,6 +143,21 @@ export default function AdminsManager({ admins, myEmail }: Props) {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-muted-foreground">{a.added_by ?? "—"}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={a.notify}
+                        disabled={updatingId === a.id}
+                        aria-label={`Toggle order alerts for ${a.email}`}
+                        className="h-4 w-4 accent-primary"
+                        onChange={() => toggleNotify(a.id, a.notify)}
+                      />
+                      <span className="text-xs text-muted-foreground">
+                        {a.notify ? "On" : "Off"}
+                      </span>
+                    </div>
+                  </TableCell>
                   <TableCell>
                     {a.email.toLowerCase() !== myEmail.toLowerCase() && (
                       <Button

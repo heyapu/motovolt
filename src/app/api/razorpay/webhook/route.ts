@@ -19,29 +19,27 @@ export async function POST(req: Request) {
 
   if (event.event === "payment.captured") {
     const payment = event.payload?.payment?.entity;
-    
+
     if (payment?.order_id) {
       // 1. Mark the order as paid in Supabase
       await markOrderPaid(payment.order_id, payment.id);
 
       // 2. Fetch and Notify Admins
       try {
-        // Query the 'admins' table for all email addresses
+        // Fetch only admins who opted into order notifications
         const { data: admins, error: adminError } = await dbAdmin()
           .from("admins")
-          .select("email");
+          .select("email")
+          .eq("notify", true);
 
         if (adminError) {
           console.error("Error fetching admins from Supabase:", adminError);
         } else if (admins && admins.length > 0) {
-          
-          // Map the returned objects into an array of simple strings: ['admin1@test.com', 'admin2@test.com']
           const adminEmails = admins.map((admin) => admin.email);
 
-          // Fire the email to the array of admins
           await resend.emails.send({
-            from: "Motovolt Store <orders@notification.motovolt.co>", // Replace with your verified domain
-            to: adminEmails, 
+            from: "Motovolt Store <orders@notification.motovolt.co>",
+            to: adminEmails,
             subject: `New Successful Order! (${payment.order_id})`,
             html: `
               <h2>New Order Received!</h2>

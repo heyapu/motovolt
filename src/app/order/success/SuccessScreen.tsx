@@ -13,7 +13,7 @@ export default function SuccessScreen({ order }: { order: OrderRow | null }) {
   if (!order || (order.status !== "PAID" && order.status !== "DELIVERED")) {
     return (
       <main className={styles.wrap}>
-        <XCircle size={48} className={styles.failIcon} />
+        <XCircle size={38} className={styles.failIcon} />
         <h1>Order not confirmed yet</h1>
         <p>
           If money was deducted, your order is on our system — we&apos;ll call
@@ -30,21 +30,20 @@ export default function SuccessScreen({ order }: { order: OrderRow | null }) {
   return (
     <main className={styles.wrap}>
       <div className="no-print">
-        <CheckCircle2 size={48} className={styles.okIcon} />
-        <h1>Order confirmed</h1>
-        <p className={styles.lead}>
-          Thanks{order.customer_name ? `, ${order.customer_name.split(" ")[0]}` : ""}!
-          Your payment went through.
-        </p>
+        <div className={styles.centerediv}>
+          <CheckCircle2 size={38} className={styles.okIcon} />
+          <h1>Order successful</h1>
+        </div>
 
         <div className={styles.notice}>
           <PhoneCall size={18} />
-          <div>
-            <strong>You&apos;ll receive a call within 24 hours</strong>
+          <div className={styles.noticecell}>
+            <h3 className={styles.noticeheader}>You&apos;ll receive a call within 24 hours</h3>
             <p>
               Our team will confirm your order and delivery details
               {order.customer_phone ? ` on ${order.customer_phone}` : ""}.
-              There&apos;s no online tracking — this call is your confirmation.
+              <br />This call is your confirmation.
+              <br /><br />
               Questions in the meantime? Call us at{" "}
               <a href={`tel:${SUPPORT_PHONE}`}>{SUPPORT_PHONE}</a>.
             </p>

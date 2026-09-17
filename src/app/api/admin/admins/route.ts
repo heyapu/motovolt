@@ -3,7 +3,6 @@ import { getAdminOrNull } from "@/lib/admin-auth";
 import { dbAdmin } from "@/lib/db-admin";
 import { adminCreateSchema, firstError } from "@/lib/validation";
 
-// Only the superadmin manages the admin list.
 export async function POST(req: Request) {
   const admin = await getAdminOrNull();
   if (admin?.role !== "superadmin") {
@@ -20,11 +19,33 @@ export async function POST(req: Request) {
     email,
     role,
     added_by: admin.email,
+    notify: true,
   });
+
   if (error) {
     const msg = error.code === "23505" ? "That email is already an admin." : error.message;
     return NextResponse.json({ error: msg }, { status: 400 });
   }
+  return NextResponse.json({ ok: true });
+}
+
+export async function PATCH(req: Request) {
+  const admin = await getAdminOrNull();
+  if (admin?.role !== "superadmin") {
+    return NextResponse.json({ error: "Superadmin only." }, { status: 403 });
+  }
+
+  const { id, notify } = await req.json();
+  if (!id || typeof notify !== "boolean") {
+    return NextResponse.json({ error: "Invalid request data." }, { status: 400 });
+  }
+
+  const { error } = await dbAdmin()
+    .from("admins")
+    .update({ notify })
+    .eq("id", id);
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 });
   return NextResponse.json({ ok: true });
 }
 

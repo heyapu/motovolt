@@ -96,6 +96,7 @@ export interface AdminRow {
   id: string;
   email: string;
   role: "superadmin" | "admin";
+  notify: boolean;
   added_by: string | null;
   created_at: string;
 }
