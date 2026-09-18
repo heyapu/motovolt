@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { Zap } from "lucide-react";
 import { requireAdmin } from "@/lib/admin-auth";
 import "@/styles/admin.css";
 
@@ -15,10 +14,7 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-secondary/40">
-      <header className="flex items-center gap-6 border-b bg-background px-6 py-3">
-        <Link href="/admin/products" className="flex items-center gap-2 font-bold tracking-wider">
-          <Zap size={18} className="text-primary" /> MOTOVOLT ADMIN
-        </Link>
+      <header style={{ padding: '20px' }} className="flex items-center gap-6 border-b bg-background px-6 py-43">
         <nav className="flex gap-4 text-sm text-muted-foreground">
           <Link href="/admin/products" className="hover:text-foreground">
             Products

@@ -89,6 +89,7 @@ export interface OrderRow {
   address: Address | null;
   created_at: string;
   paid_at: string | null;
+  serial_number: number;
   order_items: OrderItemRow[];
 }
 

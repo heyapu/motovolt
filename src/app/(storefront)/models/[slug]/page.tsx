@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
-import AccessoriesPage from "@/app/AccessoriesPage";
+import AccessoriesPage from "@/app/(storefront)/AccessoriesPage";
 import type { Model, Product } from "@/types";
 
 export const revalidate = 60;
