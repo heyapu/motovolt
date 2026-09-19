@@ -2,15 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
+import useSWR from "swr";
 import {
   type ColumnDef,
-  type ColumnFiltersState,
-  type SortingState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { Download, Loader2 } from "lucide-react";
@@ -41,17 +37,33 @@ export const statusVariant: Record<OrderRow["status"], BadgeVariant> = {
   REFUNDED: "destructive",
 };
 
-export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
+// Standard fetcher function for SWR
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+export default function OrdersManager() {
+  const [page, setPage] = React.useState(1);
+  const [statusFilter, setStatusFilter] = React.useState("ALL");
   const [error, setError] = React.useState<string | null>(null);
   const [isDownloading, setIsDownloading] = React.useState(false);
-  
   const [rowSelection, setRowSelection] = React.useState({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const [sorting, setSorting] = React.useState<SortingState>([
-    { id: "created_at", desc: true } // Default sort by newest
-  ]);
 
-  // Explicitly typed as any in callbacks to prevent strict-mode inference failures
+  // 1. Fetch data from our new API (15 rows at a time)
+  const { data, error: fetchError, isLoading, mutate } = useSWR(
+    `/api/admin/orders?page=${page}&limit=15&status=${statusFilter}`,
+    fetcher,
+    { keepPreviousData: true } // Prevents the table from flashing empty during page changes
+  );
+
+  const orders: OrderRow[] = data?.orders || [];
+  const pageCount: number = data?.totalPages || 1;
+  const statusCounts: Record<string, number> = data?.statusCounts || {};
+
+  const handleStatusChange = (newStatus: string) => {
+    setStatusFilter(newStatus);
+    setPage(1); // Always reset to page 1 when changing filters
+    setRowSelection({});
+  };
+
   const columns: ColumnDef<OrderRow, any>[] = React.useMemo(() => [
     {
       id: "select",
@@ -73,8 +85,6 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
           />
         </div>
       ),
-      enableSorting: false,
-      enableHiding: false,
     },
     {
       accessorKey: "serial_number",
@@ -148,33 +158,26 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
       id: "actions",
       header: "Actions",
       cell: ({ row }: { row: any }) => (
-        <OrderActions orderId={row.original.id} status={row.original.status} onError={setError} />
+        // If your OrderActions component changes the status, triggering mutate() refreshes the table
+        <div onClick={() => setTimeout(mutate, 500)}>
+          <OrderActions orderId={row.original.id} status={row.original.status} onError={setError} />
+        </div>
       ),
     },
-  ], []);
+  ], [mutate]);
 
   const table = useReactTable({
     data: orders,
     columns,
-    state: { sorting, columnFilters, rowSelection },
+    pageCount: pageCount,
+    state: { rowSelection },
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     onRowSelectionChange: setRowSelection,
+    manualPagination: true, // Tells TanStack Table we are handling pages manually via API
   });
 
-  const counts = orders.reduce<Record<string, number>>((acc, o) => {
-    acc[o.status] = (acc[o.status] ?? 0) + 1;
-    return acc;
-  }, {});
-
-  const currentStatusFilter = (table.getColumn("status")?.getFilterValue() as string) ?? "ALL";
-
   const handleDownloadPdf = async () => {
-    const selectedRows = table.getFilteredSelectedRowModel().rows;
+    const selectedRows = table.getSelectedRowModel().rows;
     if (selectedRows.length === 0) return;
 
     setIsDownloading(true);
@@ -211,29 +214,34 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Orders</h1>
+      <div className="flex items-center gap-4">
+        <h1 className="text-2xl font-bold">Orders</h1>
+        {isLoading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
+      </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4">
+        {/* Status Filters */}
         <div className="flex flex-wrap gap-2">
           {(["ALL", "PAID", "DELIVERED", "PENDING", "FAILED", "REFUNDED"] as const).map((s) => (
             <button
               key={s}
-              onClick={() => table.getColumn("status")?.setFilterValue(s === "ALL" ? "" : s)}
+              onClick={() => handleStatusChange(s)}
               className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                currentStatusFilter === (s === "ALL" ? "" : s)
+                statusFilter === s
                   ? "border-primary bg-primary text-primary-foreground"
                   : "bg-background hover:bg-muted"
               }`}
             >
-              {s === "ALL" ? `All (${orders.length})` : `${s} (${counts[s] ?? 0})`}
+              {s === "ALL" ? `All (${statusCounts["ALL"] || 0})` : `${s} (${statusCounts[s] || 0})`}
             </button>
           ))}
         </div>
 
+        {/* Dynamic Bulk Action Toolbar */}
         {Object.keys(rowSelection).length > 0 && (
           <div className="flex items-center gap-3 animate-in fade-in slide-in-from-bottom-2">
             <span className="text-sm text-muted-foreground">
-              {table.getFilteredSelectedRowModel().rows.length} selected
+              {table.getSelectedRowModel().rows.length} selected
             </span>
             <Button size="sm" onClick={handleDownloadPdf} disabled={isDownloading}>
               {isDownloading ? (
@@ -247,9 +255,9 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
         )}
       </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {(error || fetchError) && <p className="text-sm text-destructive">{error || "Failed to load orders."}</p>}
 
-      <Card>
+      <Card className={isLoading && !orders.length ? "opacity-50 pointer-events-none" : ""}>
         <CardContent className="p-0">
           <Table>
             <TableHeader className="bg-muted/50">
@@ -279,7 +287,7 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center text-muted-foreground">
-                    No orders found.
+                    {isLoading ? "Loading orders..." : "No orders found."}
                   </TableCell>
                 </TableRow>
               )}
@@ -288,23 +296,29 @@ export default function OrdersManager({ orders }: { orders: OrderRow[] }) {
         </CardContent>
       </Card>
       
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
+      {/* Pagination Controls */}
+      <div className="flex items-center justify-between py-4">
+        <p className="text-sm text-muted-foreground">
+          Page {page} of {pageCount}
+        </p>
+        <div className="flex space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((p) => p - 1)}
+            disabled={page <= 1}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((p) => p + 1)}
+            disabled={page >= pageCount}
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );

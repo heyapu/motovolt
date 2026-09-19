@@ -96,3 +96,56 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
+
+export async function GET(req: Request) {
+  // 1. Authenticate
+  const admin = await getAdminOrNull();
+  if (admin?.role !== "superadmin" && admin?.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+  const limit = Math.max(1, parseInt(searchParams.get("limit") || "15", 10));
+  const status = searchParams.get("status") || "ALL";
+
+  const start = (page - 1) * limit;
+  const end = start + limit - 1;
+
+  // 2. Build the paginated Supabase query
+  let query = dbAdmin()
+    .from("orders")
+    .select("*, order_items(*)", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(start, end);
+
+  if (status !== "ALL") {
+    query = query.eq("status", status);
+  }
+
+  const { data: orders, count, error } = await query;
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  // 3. Fetch counts for the status tabs (executed in parallel for speed)
+  const statuses = ["PAID", "DELIVERED", "PENDING", "FAILED", "REFUNDED"];
+  const statusCounts: Record<string, number> = {};
+  
+  const { count: allCount } = await dbAdmin().from("orders").select("*", { count: "exact", head: true });
+  statusCounts["ALL"] = allCount || 0;
+
+  await Promise.all(
+    statuses.map(async (s) => {
+      const { count: sCount } = await dbAdmin()
+        .from("orders")
+        .select("*", { count: "exact", head: true })
+        .eq("status", s);
+      statusCounts[s] = sCount || 0;
+    })
+  );
+
+  return NextResponse.json({
+    orders: orders || [],
+    totalPages: count ? Math.ceil(count / limit) : 0,
+    statusCounts
+  });
+}
