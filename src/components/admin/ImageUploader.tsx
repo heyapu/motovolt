@@ -53,7 +53,7 @@ export default function ImageUploader({ value, folder = "/products", onChange }:
     <div className="flex flex-wrap items-center gap-3">
       {value && (
         <div className="relative h-16 w-16 overflow-hidden rounded-md border bg-secondary">
-          <Image src={value} alt="Uploaded" fill sizes="64px" className="object-contain" />
+          <Image unoptimized src={value} alt="Uploaded" fill sizes="64px" className="object-contain" />
         </div>
       )}
       <Button
