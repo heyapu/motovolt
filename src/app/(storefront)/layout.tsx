@@ -6,6 +6,7 @@ import { CartProvider } from "@/context/CartContext";
 import CartButton from "@/components/CartButton/CartButton";
 import CartDrawer from "@/components/CartDrawer/CartDrawer";
 // import Navbar from "@/components/system/navbar/Navbar";
+import { Analytics } from "@vercel/analytics/next"
 
 const chakra = Chakra_Petch({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({
           <CartButton />
           <CartDrawer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
