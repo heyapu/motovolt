@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAdminOrNull } from "@/lib/admin-auth";
 import { dbAdmin } from "@/lib/db-admin";
 import { modelUpdateSchema, firstError } from "@/lib/validation";
+import { invalidateModelsCache } from "@/lib/cache-queries";
 
 export async function PUT(
   req: Request,
@@ -29,5 +30,6 @@ export async function PUT(
     .eq("id", id);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+  await invalidateModelsCache();
   return NextResponse.json({ ok: true });
 }

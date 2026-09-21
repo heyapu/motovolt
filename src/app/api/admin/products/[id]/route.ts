@@ -2,9 +2,8 @@ import { NextResponse } from "next/server";
 import { getAdminOrNull } from "@/lib/admin-auth";
 import { dbAdmin } from "@/lib/db-admin";
 import { productPayloadSchema, firstError } from "@/lib/validation";
+import { invalidateProductsCache } from "@/lib/cache-queries";
 
-// Update — resets model links + variants (order_items keep their own
-// snapshots so history is safe).
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -35,6 +34,8 @@ export async function PUT(
     );
   }
 
+  await invalidateProductsCache(); // <-- Invalidate cache here
+
   return NextResponse.json({ ok: true });
 }
 
@@ -46,11 +47,15 @@ export async function DELETE(
   if (!admin) return NextResponse.json({ error: "Not authorised." }, { status: 401 });
 
   const { id } = await params;
-  // Soft delete — keeps order history intact.
+
   const { error } = await dbAdmin()
     .from("products")
     .update({ is_active: false })
     .eq("id", id);
+
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+
+  await invalidateProductsCache();
+
   return NextResponse.json({ ok: true });
 }

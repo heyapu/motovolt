@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAdminOrNull } from "@/lib/admin-auth";
 import { dbAdmin } from "@/lib/db-admin";
 import { productPayloadSchema, firstError } from "@/lib/validation";
+import { invalidateProductsCache } from "@/lib/cache-queries";
 
 export async function POST(req: Request) {
   const admin = await getAdminOrNull();
@@ -30,6 +31,8 @@ export async function POST(req: Request) {
       variants.map((v, i) => ({ ...v, product_id: created.id, sort_order: i }))
     );
   }
+
+  await invalidateProductsCache();
 
   return NextResponse.json({ id: created.id });
 }

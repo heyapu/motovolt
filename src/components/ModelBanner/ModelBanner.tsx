@@ -14,12 +14,12 @@ export default function ModelBanner({ model }: { model: Model }) {
         </a>
       </div>
       <div className={styles.media}>
-        <Image
+        <img
           src={model.banner_image ?? "/placeholder.webp"}
           alt={model.name}
-          sizes="(max-width: 768px) 100vw, 60vw"
+          // sizes="(max-width: 768px) 100vw, 60vw"
           className={styles.img}
-          unoptimized
+          // unoptimized
         />
       </div>
       {/* <ArrowUpRight className={styles.corner} size={20} aria-hidden /> */}

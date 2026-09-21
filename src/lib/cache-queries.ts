@@ -39,3 +39,12 @@ export async function getCachedProducts(): Promise<Product[]> {
 
     return products;
 }
+
+
+export async function invalidateModelsCache() {
+    await redis.del("store:models:active");
+}
+
+export async function invalidateProductsCache() {
+    await redis.del("store:products:active");
+}

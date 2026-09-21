@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAdminOrNull } from "@/lib/admin-auth";
 import { dbAdmin } from "@/lib/db-admin";
 import { modelCreateSchema, firstError } from "@/lib/validation";
+import { invalidateModelsCache } from "@/lib/cache-queries";
 
 const slugify = (s: string) =>
   s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -32,5 +33,7 @@ export async function POST(req: Request) {
     const msg = error.code === "23505" ? "A model with that name already exists." : error.message;
     return NextResponse.json({ error: msg }, { status: 400 });
   }
+
+  await invalidateModelsCache();
   return NextResponse.json({ id: data.id });
 }
