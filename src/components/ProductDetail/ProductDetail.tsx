@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { inr } from "@/lib/format";
 import QtyStepper from "@/components/QtyStepper/QtyStepper";
 import type { Product } from "@/types";
-import Navbar from "../system/navbar/Navbar";
+import Navbar from "../system/layout/Navbar/Navbar";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const { addItem, openCart } = useCart();

@@ -1,8 +1,64 @@
+// @import "variables";
+
+// .tabs {
+//   display: inline-flex;
+//   gap: 0rem;
+//   background: #fff;
+//   border-radius: $radius-md;
+//   padding: $space-1;
+//   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+// }
+
+// .tab,
+// .active {
+//   border: 0;
+//   background: transparent;
+//   border-radius: $radius-sm;
+//   padding: 1.6rem 2rem;
+//   font-size: 1.4rem;
+//   font-weight: 500;
+//   color: $color-text;
+
+//   display: inline-flex;
+//   align-items: center;
+//   flex-direction: row;
+//   gap: 0.6rem;
+
+//   @media (max-width: 60rem) {
+//     font-size: 1.4rem;
+//     border-radius: 0.78rem;
+//     padding: 1.8rem 0.8rem;
+//   }
+// }
+
+// .active {
+//   background: $color-accent;
+//   color: #fff;
+// }
+
+
+// .newBadge {
+//   display: flex;
+//   padding: 0.3rem 0.2rem;
+//   border-radius: 0.2rem;
+//   font-size: 0.8rem;
+//   font-weight: 500;
+//   background-color: #fff;
+//   color: $color-accent;
+
+//   @media (max-width: 60rem) {
+//     font-size: 0.6rem;
+//     padding: 0.2rem 0.2rem;
+//   }
+// }
+
+
+
 @import "variables";
 
 .tabs {
   display: inline-flex;
-  gap: 0rem;
+  gap: 0px;
   background: #fff;
   border-radius: $radius-md;
   padding: $space-1;
@@ -14,20 +70,19 @@
   border: 0;
   background: transparent;
   border-radius: $radius-sm;
-  padding: 1.6rem 2rem;
-  font-size: 1.4rem;
+  padding: 16px 20px;
+  font-size: 14px;
   font-weight: 500;
   color: $color-text;
-
   display: inline-flex;
   align-items: center;
   flex-direction: row;
-  gap: 0.6rem;
+  gap: 6px;
 
-  @media (max-width: 60rem) {
-    font-size: 1.4rem;
-    border-radius: 0.78rem;
-    padding: 1.8rem 0.8rem;
+  @media (max-width: 600px) {
+    font-size: 14px;
+    border-radius: 7.8px;
+    padding: 18px 8px;
   }
 }
 
@@ -36,18 +91,17 @@
   color: #fff;
 }
 
-
 .newBadge {
   display: flex;
-  padding: 0.3rem 0.2rem;
-  border-radius: 0.2rem;
-  font-size: 0.8rem;
+  padding: 3px 2px;
+  border-radius: 2px;
+  font-size: 8px;
   font-weight: 500;
   background-color: #fff;
   color: $color-accent;
 
-  @media (max-width: 60rem) {
-    font-size: 0.6rem;
-    padding: 0.2rem 0.2rem;
+  @media (max-width: 600px) {
+    font-size: 6px;
+    padding: 2px 2px;
   }
 }

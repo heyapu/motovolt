@@ -1,3 +1,101 @@
+// @import "variables";
+
+// .wrap {
+//   @include container;
+//   max-width: 720px;
+//   padding-block: $space-8;
+//   display: flex;
+//   flex-direction: column;
+//   gap: $space-5;
+
+//   h1 {
+//     font-size: 3.2rem;
+//     margin-top: $space-3;
+//     font-family: $font-body;
+//     text-align: center;
+//     letter-spacing: -0.1rem;
+//   }
+// }
+
+// .okIcon {
+//   text-align: center;
+//   color: $color-success;
+// }
+
+// .failIcon {
+//   color: $color-danger;
+// }
+
+// .lead {
+//   color: $color-text-muted;
+//   font-size: 1.46rem;
+//   font-weight: 500;
+// }
+
+// .notice {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2rem;
+//   background: $color-bg;
+//   border-radius: $radius-md;
+//   padding: 2rem 1.4rem;
+//   margin-top: $space-4;
+
+//   .noticecell {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1rem;
+
+//     .noticeheader {
+//       display: inline-flex;
+//       font-family: $font-body;
+//       font-size: 2rem;
+//       font-weight: 600;
+//     }
+//   }
+
+//   p {
+//     margin: $space-1 0 0;
+//     font-size: 1.2rem;
+//     font-weight: 400;
+//     color: $color-text-muted;
+//   }
+
+//   a {
+//     color: $color-accent;
+//     font-weight: 600;
+//   }
+// }
+
+// .print {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: $space-2;
+//   margin-top: $space-4;
+//   border: 1px solid $color-border;
+//   border-radius: $radius-sm;
+//   background: $color-white;
+//   padding: $space-3 $space-4;
+//   font-family: $font-body;
+//   font-weight: 600;
+// }
+
+// .back {
+//   color: $color-accent;
+//   font-weight: 600;
+//   font-size: 1.4rem;
+// }
+
+// .centerediv{
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+
+//   padding: 4rem;
+// }
+
+
+
 @import "variables";
 
 .wrap {
@@ -9,11 +107,11 @@
   gap: $space-5;
 
   h1 {
-    font-size: 3.2rem;
+    font-size: 32px;
     margin-top: $space-3;
     font-family: $font-body;
     text-align: center;
-    letter-spacing: -0.1rem;
+    letter-spacing: -1px;
   }
 }
 
@@ -28,35 +126,35 @@
 
 .lead {
   color: $color-text-muted;
-  font-size: 1.46rem;
+  font-size: 14.6px;
   font-weight: 500;
 }
 
 .notice {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 20px;
   background: $color-bg;
   border-radius: $radius-md;
-  padding: 2rem 1.4rem;
+  padding: 20px 14px;
   margin-top: $space-4;
 
   .noticecell {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 10px;
 
     .noticeheader {
       display: inline-flex;
       font-family: $font-body;
-      font-size: 2rem;
+      font-size: 20px;
       font-weight: 600;
     }
   }
 
   p {
     margin: $space-1 0 0;
-    font-size: 1.2rem;
+    font-size: 12px;
     font-weight: 400;
     color: $color-text-muted;
   }
@@ -83,13 +181,13 @@
 .back {
   color: $color-accent;
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 14px;
 }
 
-.centerediv{
+.centerediv {
   display: flex;
   align-items: center;
   flex-direction: column;
 
-  padding: 4rem;
+  padding: 40px;
 }

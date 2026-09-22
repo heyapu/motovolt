@@ -23,11 +23,11 @@
   justify-content: space-between;
   align-items: center;
 
-  padding-bottom: 1rem;
-  // border-bottom: 0.14rem solid hsl(0, 0%, 63%);
+  padding-bottom: 10px;
+  // border-bottom: 1.4px solid hsl(0, 0%, 63%);
 
   h3 {
-    font-size: 2rem;
+    font-size: 20px;
     font-weight: 500;
     font-family: $font-body;
   }
@@ -55,7 +55,7 @@
 .item {
   display: flex;
   flex-direction: row;
-  gap: 2.4rem;
+  gap: 24px;
   border-bottom: 1px solid $color-border;
   padding-bottom: $space-4;
 }
@@ -64,8 +64,8 @@
   display: flex;
   position: relative;
   width: 100%;
-  max-width: 10rem;
-  aspect-ratio: 1/1;
+  max-width: 100px;
+  aspect-ratio: 1 / 1;
   background: $color-bg;
   border-radius: $radius-sm;
   overflow: hidden;
@@ -83,24 +83,24 @@
   width: 100%;
   justify-content: space-between;
   height: 100%;
-  padding: 0.4rem 0rem;
+  padding: 4px 0px;
 }
 
 .meta {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 0.4rem;
-  font-size: 1.4rem;
+  gap: 4px;
+  font-size: 14px;
   font-weight: 500;
 
   .productinfo {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 2px;
 
     h2 {
-      font-size: 1.4rem;
+      font-size: 14px;
       line-height: 100%;
       font-weight: 500;
       font-family: $font-body;
@@ -108,12 +108,12 @@
   }
 
   span {
-    font-size: 1.8rem;
+    font-size: 18px;
     font-weight: 500;
   }
 
   small {
-    font-size: 1.2rem;
+    font-size: 12px;
     font-weight: 500;
     color: $color-text-muted;
   }
@@ -144,11 +144,11 @@
 
   input {
     font-family: inherit;
-    font-size: 1.4rem;
+    font-size: 14px;
     font-weight: 400;
     border: 0.2px solid $color-border;
     border-radius: $radius-sm;
-    padding: 1rem 0.6rem;
+    padding: 10px 6px;
 
     &:focus-visible {
       outline: 2px solid $color-accent;
@@ -184,13 +184,13 @@
   border-radius: $radius-sm;
   background: #000;
   color: #fff;
-  padding: 1.8rem 1rem;
+  padding: 18px 10px;
   font-weight: 700;
   line-height: 100%;
 
   font-weight: 500;
   font-family: $font-heading;
-  font-size: 1.2rem;
+  font-size: 12px;
 
   .btninner {
     display: flex;
@@ -201,7 +201,7 @@
     span {
       font-weight: 500;
       font-family: $font-heading;
-      font-size: 1.6rem;
+      font-size: 16px;
     }
   }
 
@@ -232,7 +232,7 @@
   margin: $space-2 0 0;
 
   font-family: $font-body;
-  font-size: 1.2rem;
+  font-size: 12px;
   font-weight: 500;
   color: hsl(0, 0%, 60%);
 }
@@ -244,10 +244,10 @@
 }
 
 .fineprint {
-  font-size: 1rem;
+  font-size: 10px;
   line-height: 136%;
   font-family: $font-body;
   font-weight: 400;
-  padding: 1rem 1rem 0rem 1rem;
+  padding: 10px 10px 0px 10px;
   color: hsl(0, 0%, 60%);
 }

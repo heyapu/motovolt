@@ -1,0 +1,64 @@
+.primaryBtn {
+    padding: 10px 34px;
+    border-radius: 6px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    min-width: 235px;
+    border: none;
+}
+
+.blackButton {
+    background: #000;
+    color: #fff;
+}
+
+.whiteButton {
+    background-color: #fff;
+    color: #000;
+
+    svg path {
+        fill: #000;
+    }
+}
+
+.borderBlack {
+    background-color: transparent;
+    border: 1px solid #000;
+
+    svg path {
+        fill: #000;
+    }
+}
+
+.orangeButton {
+    background-color: var(--color-1);
+    color: var(--color-4);
+}
+
+@media (max-width: 768px) {
+    .primaryBtn {
+        padding: 10px 16px;
+        min-width: 150px;
+
+        svg {
+            height: 10px;
+            width: 10px;
+        }
+    }
+
+    .noMbsvg {
+        min-width: 100px;
+        text-align: center;
+
+        svg {
+            display: none;
+        }
+    }
+
+    .ctaBtn {
+        max-width: 240px;
+    }
+}

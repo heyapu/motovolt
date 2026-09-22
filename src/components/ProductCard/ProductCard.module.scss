@@ -2,40 +2,60 @@
 
 .card {
   position: relative;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
 
   background: $color-card;
+
   border: 1px solid $color-border;
+
   border-radius: $radius-md;
-  padding: 2rem;
+
+  padding: 20px;
+
   width: 100%;
+
   overflow: hidden;
-  aspect-ratio: 1/1;
+
+  aspect-ratio: 1 / 1;
 
   &:hover .add {
     opacity: 1;
+
     backdrop-filter: blur(0px);
+
     transform: translateY(calc(0%));
   }
 }
 
 .head {
   display: flex;
+
   justify-content: space-between;
+
   gap: $space-3;
+
   font-size: $fs-sm;
+
   width: 100%;
+
   flex-direction: row;
+
   align-items: flex-start;
+
   z-index: 10;
 }
 
 .title {
   font-weight: 400;
+
   font-family: $font-body;
-  font-size: 1.4rem;
+
+  font-size: 14px;
 
   &:hover {
     color: $color-accent;
@@ -44,28 +64,41 @@
 
 .price {
   font-weight: 400;
-  font-size: 1.8rem;
+
+  font-size: 18px;
+
   font-family: $font-heading;
 
   .soldout {
     display: flex;
-    font-size: 1.1rem;
+
+    font-size: 11px;
+
     text-transform: uppercase;
+
     color: hsl(0, 0%, 60%);
-    padding: 0.6rem 0.4rem;
+
+    padding: 6px 4px;
+
     background-color: hsl(0, 0%, 90%);
-    border-radius: 0.4rem;
+
+    border-radius: 4px;
   }
 }
 
 .media {
   position: relative;
+
   flex: 1;
+
   margin-top: $space-3;
+
   z-index: 0;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 }
 
@@ -75,63 +108,82 @@
 
 .soldOut {
   position: absolute;
+
   top: $space-3;
+
   right: $space-3;
+
   z-index: 1;
+
   font-size: $fs-xs;
+
   border: 1px solid $color-border;
+
   border-radius: $radius-pill;
+
   padding: 2px $space-2;
+
   background: $color-white;
+
   color: $color-text-muted;
 }
 
 .btns {
   display: flex;
+
   width: 100%;
 
   position: absolute;
-  bottom: 2rem;
-  padding: 0rem 2rem;
+
+  bottom: 20px;
+
+  padding: 0px 20px;
 }
 
 .add {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: $space-2;
 
   border: 0;
+
   border-radius: $radius-sm;
+
   background: $color-accent;
 
   color: #fff;
-  padding: 1.4rem 1rem;
-  font-size: 1.2rem;
+
+  padding: 14px 10px;
+
+  font-size: 12px;
+
   font-weight: 500;
 
   width: 100%;
+
   font-family: $font-heading;
+
   text-transform: uppercase;
 
   opacity: 0;
+
   backdrop-filter: blur(100px);
+
   transform: translateY(200%);
+
   transition: all 0.15s ease-in-out;
+
   z-index: 10;
 
   &:disabled {
     background: $color-border;
+
     color: $color-text-muted;
+
     cursor: not-allowed;
   }
-
-  // @media (hover: none) {
-  //   opacity: 1;
-  //   transform: none;
-  // }
-
-  // @media (prefers-reduced-motion: reduce) {
-  //   transition: none;
-  // }
 }
